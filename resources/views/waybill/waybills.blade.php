@@ -15,7 +15,7 @@
             cursor: grabbing;
         }
         .highlight {
-            @apply bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white font-semibold shadow-md transition-all;
+            @apply bg-gray-100 text-gray-800  font-semibold shadow-md transition-all;
             border-left: 4px solid #10b981; /* Green accent */
         }
 
@@ -28,7 +28,7 @@
         }
         .highlight th {
             color: #0f172a; /* Tailwind slate-900 for dark, defined text */
-            dark:text-white; /* Maintain white text in dark mode */
+            ; /* Maintain white text in dark mode */
             font-weight: 700; /* Extra bold for headers */
         }
 
@@ -47,7 +47,7 @@
     </style>
     <div class="py-12">
         <!-- Start block -->
-        <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 antialiased">
+        <section class="bg-gray-50 p-3 sm:p-5 antialiased">
             <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
                 <!-- Start coding here -->                             
                 @if(session('message'))
@@ -57,7 +57,7 @@
                 @endif
 
 
-                <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+                <div class="bg-white relative shadow-md sm:rounded-lg overflow-hidden">
                     <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                             <!-- Tooltip Container -->
                         
@@ -66,18 +66,18 @@
                                 <label for="simple-search" class="sr-only">Search</label>
                                 <div class="relative w-full">
                                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                                         </svg>
                                     </div>
                                     <input type="text" id="search" name="search" 
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required=""
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2" placeholder="Search" required=""
                                         value="{{ request('search') }}">
                                 </div>
                             </form>
                         </div>
                         <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                            <button type="button" id="createWaybillModalButton" data-modal-target="createWaybillModal" data-modal-toggle="createWaybillModal" class="flex items-center justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                            <button type="button" id="createWaybillModalButton" data-modal-target="createWaybillModal" data-modal-toggle="createWaybillModal" class="flex items-center justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2">
                                 <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                                 </svg>
@@ -87,8 +87,8 @@
                     </div>
                     <div class="overflow-x-auto">
                     @if($waybills->total() > 0)  {{-- Check if any results exist --}}
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 border-separate border-spacing-0">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <table class="w-full text-sm text-left text-gray-500 border-separate border-spacing-0">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
                                     <th scope="col" class="px-4 py-4">Waybill Number</th>
                                     <th scope="col" class="px-4 py-3">Consignee</th>
@@ -112,14 +112,14 @@
                                     data-cbm="{{$waybill->cbm}}"
                                     data-price="{{$waybill->price}}"
                                     data-status="{{$waybill->status}}"
-                                    class="waybill-row border-b dark:border-gray-700 {{ $loop->first ? 'highlight' : '' }}"
+                                    class="waybill-row border-b {{ $loop->first ? 'highlight' : '' }}"
                                 >
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$waybill->waybill_no}}</th>
+                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">{{$waybill->waybill_no}}</th>
                                     <td class="px-4 py-3">{{$waybill->consignee->name}}</td>
                                     <td class="px-4 py-3">PHP{{$waybill->price}}</td>
                                     <td class="px-4 py-3">{{$waybill->status}}</td>
                                     <td class="px-4 py-3 flex items-center justify-end">
-                                        <button type="button" data-modal-target="updateWaybillModal" data-modal-toggle="updateWaybillModal" class="update-Modal z-10 flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200" data-id="{{ $waybill->id }}">
+                                        <button type="button" data-modal-target="updateWaybillModal" data-modal-toggle="updateWaybillModal" class="update-Modal z-10 flex w-full items-center py-2 px-4 hover:bg-gray-100" data-id="{{ $waybill->id }}">
                                         <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                             <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
@@ -148,11 +148,11 @@
         <div id="createWaybillModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative p-4 w-full max-w-2xl max-h-full">
                 <!-- Modal content -->
-                <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                <div class="relative p-4 bg-white rounded-lg shadow sm:p-5">
                     <!-- Modal header -->
-                    <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Add Waybill</h3>
-                        <button type="button" id="addCloseModal" name="addCloseModal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-target="createWaybillModal" data-modal-toggle="createWaybillModal">
+                    <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5">
+                        <h3 class="text-lg font-semibold text-gray-900">Add Waybill</h3>
+                        <button type="button" id="addCloseModal" name="addCloseModal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-target="createWaybillModal" data-modal-toggle="createWaybillModal">
                             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
                             </svg>
@@ -166,48 +166,48 @@
                         @method('POST')
                         <div class="grid gap-4 mb-4 sm:grid-cols-3">
                             <div>
-                                <label for="waybill_no" class="form-field block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waybill Number</label>
-                                <input  type="text" name="waybill_no" id="waybill_no" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Waybill Number" required=""> 
+                                <label for="waybill_no" class="form-field block mb-2 text-sm font-medium text-gray-900 ">Waybill Number</label>
+                                <input  type="text" name="waybill_no" id="waybill_no" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Waybill Number" required=""> 
                             </div>
                             <div>
-                                <label for="consignee" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Consignee</label>
-                                <input type="text" name="consignee" id="add_consignee" class="form-field  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Consignee" required=""> 
+                                <label for="consignee" class="block mb-2 text-sm font-medium text-gray-900 ">Consignee</label>
+                                <input type="text" name="consignee" id="add_consignee" class="form-field  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Consignee" required=""> 
                                 <div id="add_consignee_list" class="absolute z-10 bg-white shadow-md rounded-md w-full max-h-60 overflow-y-auto hidden"></div>
                                 <span class="text-xs text-red-600 text-left block" id="consignee_id_error"></span>
                                 <input type="hidden" name="consignee_id" id="add_consignee_id">
 
                             </div>
                             <div>
-                                <label for="consignee_no" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Consignee #</label>
-                                <input type="text" name="consignee_no" id="add_consignee_no" class="form-field  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Phone #" required="">
+                                <label for="consignee_no" class="block mb-2 text-sm font-medium text-gray-900" >Consignee #</label>
+                                <input type="text" name="consignee_no" id="add_consignee_no" class="form-field  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Phone #" required="">
                             </div>
                             <div>
-                                <label for="shipper" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipper</label>
-                                <input type="text" name="shipper" id="add_shipper" class="form-field  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Shipper" required="">
+                                <label for="shipper" class="block mb-2 text-sm font-medium text-gray-900">Shipper</label>
+                                <input type="text" name="shipper" id="add_shipper" class="form-field  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="Shipper" required="">
                                 <div id="add_shipper_list" class="absolute z-10 bg-white shadow-md rounded-md w-full max-h-60 overflow-y-auto hidden"></div>
                                 <span class="text-xs text-red-600 text-left block" id="shpper_id_error"></span>
                                 <input type="hidden" name="shipper_id" id="add_shipper_id">
                             </div>
 
                             <div>
-                                <label for="shipper_no" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipper #</label>
-                                <input type="text" name="shipper_no" id="add_shipper_no" class="form-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Phone #" required="">
+                                <label for="shipper_no" class="block mb-2 text-sm font-medium text-gray-900">Shipper #</label>
+                                <input type="text" name="shipper_no" id="add_shipper_no" class="form-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="Phone #" required="">
                             </div>
                             <div></div>
                             <div>
-                                <label for="shipment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipment</label>
-                                <input type="text" name="shipment" id="shipment" class="form-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Shipment" required="">
+                                <label for="shipment" class="block mb-2 text-sm font-medium text-gray-900">Shipment</label>
+                                <input type="text" name="shipment" id="shipment" class="form-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="Shipment" required="">
                             </div>
                             <div>
-                                <label for="cbm" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CBM</label>
-                                <input type="number" name="cbm" id="cbm" max="999999.99" step="0.01" class="form-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="CBM" required="">
+                                <label for="cbm" class="block mb-2 text-sm font-medium text-gray-900">CBM</label>
+                                <input type="number" name="cbm" id="cbm" max="999999.99" step="0.01" class="form-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="CBM" required="">
                             </div>
                             <div>
-                                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                                <input type="number" name="price" id="price" max="999999.99" step="0.01" class="form-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="PHP" required="">
+                                <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Price</label>
+                                <input type="number" name="price" id="price" max="999999.99" step="0.01" class="form-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="PHP" required="">
                             </div>
                             <div>
-                                <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+                                <label for="status" class="block mb-2 text-sm font-medium text-gray-900">Status</label>
                                 <select name="status" id="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
                                     @foreach($statuses as $status)
                                         <option value="{{ $status }}" {{ $waybill->status == $status ? 'selected' : '' }}>
@@ -218,7 +218,7 @@
                             </div>
                         </div>
                         <button type="submit" name="submitAdd" id="submitAdd"
-                            class="text-white inline-flex items-center bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                            class="text-white inline-flex items-center bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
                             <svg class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                             </svg>
@@ -232,11 +232,11 @@
         <div id="updateWaybillModal" name="updateWaybillModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative p-4 w-full max-w-2xl max-h-full">
                 <!-- Modal content -->
-                <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                <div class="relative p-4 bg-white rounded-lg shadow sm:p-5">
                     <!-- Modal header -->
-                    <div class="modal-header draggable-header flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Update Waybill</h3>
-                        <button type="button" id="closeModal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="updateWaybillModal">
+                    <div class="modal-header draggable-header flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5">
+                        <h3 class="text-lg font-semibold text-gray-900">Update Waybill</h3>
+                        <button type="button" id="closeModal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="updateWaybillModal">
                             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
                             </svg>
@@ -251,47 +251,47 @@
                         <div class="grid gap-4 mb-4 sm:grid-cols-3">
                             <input type="hidden" id="update_waybill_id">
                             <div>
-                                <label for="waybill_no" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waybill Number</label>
-                                <input type="text" name="waybill_no" id="update_waybill_no" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Waybill Number"  required=""> 
+                                <label for="waybill_no" class="block mb-2 text-sm font-medium text-gray-900 ">Waybill Number</label>
+                                <input type="text" name="waybill_no" id="update_waybill_no" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="Waybill Number"  required=""> 
                             </div>
                             <div>
-                                <label for="consignee" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Consignee</label>
-                                <input type="text" name="consignee" id="update_consignee" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Consignee"  required=""> 
+                                <label for="consignee" class="block mb-2 text-sm font-medium text-gray-900 ">Consignee</label>
+                                <input type="text" name="consignee" id="update_consignee" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="Consignee"  required=""> 
                                 <div id="consignee_list" class="absolute z-10 bg-white shadow-md rounded-md w-full max-h-60 overflow-y-auto hidden"></div>
                                 <span class="text-xs text-red-600 text-left block" id="consignee_id_error"></span>
                                 <input type="hidden" name="consignee_id" id="consignee_id">
                             </div>
                             <div>
-                                <label for="consignee_no" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Consignee #</label>
-                                <input type="text" name="consignee_no" id="update_consignee_no" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Phone #" required="">
+                                <label for="consignee_no" class="block mb-2 text-sm font-medium text-gray-900 ">Consignee #</label>
+                                <input type="text" name="consignee_no" id="update_consignee_no" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="Phone #" required="">
                             </div>
                             <div>
-                                <label for="shipper" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipper</label>
-                                <input type="text" name="shipper" id="update_shipper" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Shipper" required="">
+                                <label for="shipper" class="block mb-2 text-sm font-medium text-gray-900 ">Shipper</label>
+                                <input type="text" name="shipper" id="update_shipper" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="Shipper" required="">
                                 <div id="shipper_list" class="absolute z-10 bg-white shadow-md rounded-md w-full max-h-60 overflow-y-auto hidden"></div>
                                 <span class="text-xs text-red-600 text-left block" id="consignee_id_error"></span>
                                 <input type="hidden" name="shipper_id" id="shipper_id">                                            
                             </div>
 
                             <div>
-                                <label for="shipper_no" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipper #</label>
-                                <input type="text" name="shipper_no" id="update_shipper_no" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Phone #" required="">
+                                <label for="shipper_no" class="block mb-2 text-sm font-medium text-gray-900 ">Shipper #</label>
+                                <input type="text" name="shipper_no" id="update_shipper_no" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="Phone #" required="">
                             </div>
                             <div></div>
                             <div>
-                                <label for="shipment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipment</label>
-                                <input type="text" name="shipment" id="update_shipment" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Shipment" required="">
+                                <label for="shipment" class="block mb-2 text-sm font-medium text-gray-900 ">Shipment</label>
+                                <input type="text" name="shipment" id="update_shipment" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="Shipment" required="">
                             </div>
                             <div>
-                                <label for="cbm" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CBM</label>
-                                <input type="number" name="cbm" id="update_cbm" max="9999999.99" step="0.01" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="CBM" required="">
+                                <label for="cbm" class="block mb-2 text-sm font-medium text-gray-900 ">CBM</label>
+                                <input type="number" name="cbm" id="update_cbm" max="9999999.99" step="0.01" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="CBM" required="">
                             </div>
                             <div>
-                                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                                <input type="number" name="price" id="update_price" max="999999.99" step="0.01" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="PHP" required="">
+                                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 ">Price</label>
+                                <input type="number" name="price" id="update_price" max="999999.99" step="0.01" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " placeholder="PHP" required="">
                             </div>
                             <div>
-                                <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+                                <label for="status" class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
                                 <select name="status" id="update_status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
                                     @foreach($statuses as $status)
                                         <option value="{{ $status }}" {{ $waybill->status == $status ? 'selected' : '' }}>
@@ -301,7 +301,7 @@
                                 </select>                                        
                             </div>                                    </div>
                         <div class="flex items-center space-x-4">
-                            <button type="submit" class="text-white bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Update Waybill</button>
+                            <button type="submit" class="text-white bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Update Waybill</button>
                         </div>
                     </form>
                 </div>
@@ -411,7 +411,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create a new row element
         let newRow = document.createElement('tr');
         //newRow.className = "waybill-row border-b dark:border-gray-700";
-        newRow.classList.add("highlight","waybill-row", "border-b", "dark:border-gray-700","highlight"); // Highlight the new row
+        newRow.classList.add("highlight","waybill-row", "border-b","highlight"); // Highlight the new row
         newRow.setAttribute("data-id", waybill.id);
         newRow.setAttribute("data-waybill_no", waybill.waybill_no);
         newRow.setAttribute("data-consignee_id", waybill.consignee_id);
@@ -437,7 +437,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let editButton = document.createElement('button');
         editButton.type = "button";
-        editButton.className = "update-Modal z-10 flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200";
+        editButton.className = "update-Modal z-10 flex w-full items-center py-2 px-4 hover:bg-gray-100";
         //editButton.setAttribute("data-modal-target", "updateWaybillModal");
         //editButton.setAttribute("data-modal-toggle", "updateWaybillModal");
         editButton.setAttribute("data-id", waybill.id);
@@ -496,7 +496,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (isHeader) {
             cell.setAttribute("scope", "row");
-            cell.classList.add("font-medium", "text-gray-900", "whitespace-nowrap", "dark:text-white");
+            cell.classList.add("font-medium", "text-gray-900", "whitespace-nowrap", "");
         }
         
         return cell;
