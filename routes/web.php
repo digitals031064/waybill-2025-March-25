@@ -32,7 +32,7 @@ Route::post('/waybills', [WaybillController::class, 'store'])->middleware(['auth
 Route::get('/waybills/{waybill}/edit', [WaybillController::class, 'edit'])->middleware(['auth', 'verified'])->name('waybills.edit');
 Route::get('waybill/waybills/{id}', [WaybillController::class, 'show'])->middleware(['auth', 'verified'])->name('waybills.show');
 Route::put('/waybills/{waybill}/update', [WaybillController::class, 'update'])->middleware(['auth', 'verified'])->name('waybills.update');
-Route::get('/tracking/track', [WaybillController::class, 'track'])->name('waybills.track');
+Route::get('/tracking/track', [ActivityLogController::class, 'track'])->name('logs.track');
 
 
 Route::get('/waybill/waybills', function () {

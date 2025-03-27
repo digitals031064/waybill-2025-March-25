@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\User;
 use App\Models\Waybill;
+use App\Models\ActivityLog;
 
 class ProfileController extends Controller
 {
@@ -61,13 +62,18 @@ class ProfileController extends Controller
     }
 
     public function show(){
-        $users = User::all();
-        $waybills = Waybill::all();
+        $users = User::simplePaginate(5);
+        $waybills = Waybill::where('status', '!=', 'Delivered')
+                   ->orderBy('updated_at', 'asc')
+                   ->simplePaginate(10);
+        $totalWaybills = Waybill::count();
+        $activeWaybills = Waybill::where('status', '!=', 'Delivered')->count();
+        $logs = ActivityLog::simplePaginate(5);
 
         $user = auth()->user(); // Get the authenticated user
 
         if ($user->usertype === 'admin') {
-            return view('admin.dashboard', compact('waybills','users'));
+            return view('admin.dashboard', compact('waybills','users', 'logs', 'totalWaybills', 'activeWaybills'));
         } else {
             return view('dashboard', compact('waybills'));
         }

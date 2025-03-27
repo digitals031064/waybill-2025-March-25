@@ -10,11 +10,11 @@
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-white  rounded-lg p-8 md:p-12">
                     <p class="text-lg font-normal text-gray-500 mb-4">Active Waybills</p>
-                    <h2 class="text-gray-900 text-3xl font-extrabold mb-2">10</h2>
+                    <h2 class="text-gray-900 text-3xl font-extrabold mb-2">{{$activeWaybills}}</h2>
                 </div>
                 <div class="bg-white  rounded-lg p-8 md:p-12">
                     <p class="text-lg font-normal text-gray-500 mb-4">All Waybills</p>
-                    <h2 class="text-gray-900 text-3xl font-extrabold mb-2">20</h2>
+                    <h2 class="text-gray-900 text-3xl font-extrabold mb-2">{{$totalWaybills}}</h2>
                 </div>
                 <div class="bg-white  rounded-lg p-8 md:p-12">
                     <p class="text-lg font-normal text-gray-500 mb-4">All Waybills</p>
@@ -74,8 +74,8 @@
                 <div class="my-8 px-8">
                     <h3 class="mb-4"> User List</h3>                      
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-blue-300 dark:bg-gray-700 dark:text-gray-400">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                            <thead class="text-xs text-gray-700 uppercase bg-blue-300">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
                                         Full Name
@@ -93,8 +93,8 @@
                             </thead>
                             <tbody>
                                 @foreach ($users as $user)
-                                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                         {{$user->name}}
                                     </th>
                                     <td class="px-6 py-4">
@@ -104,7 +104,7 @@
                                         {{$user->usertype}}
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        <a href="" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                                        <a href="" class="font-medium text-blue-600 hover:underline">View</a>
                                     </th>
                                 </tr>
                                 
@@ -116,8 +116,8 @@
                 <div class="my-8 px-8">
                     <h3 class="mb-4"> Recent Activity</h3>                      
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-blue-300 dark:bg-gray-700 dark:text-gray-400">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                            <thead class="text-xs text-gray-700 uppercase bg-blue-300">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
                                         Name
@@ -134,19 +134,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
-                                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{$user->name}}
+                                @foreach ($logs as $log)
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                        {{$log->user->name}}
                                     </th>
                                     <td class="px-6 py-4">
-                                        11:11:11
+                                        {{$log->updated_at}}
                                     </td>
                                     <th scope="col" class="px-6 py-3">
-                                        222222
+                                        {{$log->waybill->waybill_no}}
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        <a href="" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                                        <a href="" class="font-medium text-blue-600 hover:underline">View</a>
                                     </th>
                                 </tr>
                                 

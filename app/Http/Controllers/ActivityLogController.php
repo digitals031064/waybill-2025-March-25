@@ -21,4 +21,20 @@ class ActivityLogController extends Controller
         // Pass the logs data to the view
         return view('admin.user-management', compact('logs'));
     }
+
+    public function track(Request $request){
+        $logs = null;
+
+        if ($request->has('waybill_no')) {
+            $request->validate([
+                'waybill_no' => 'required|digits:6' 
+            ]);
+
+            $logs = ActivityLog::whereHas('waybill', function ($query) use ($request) {
+                $query->where('waybill_no', $request->waybill_no);
+            })->orderBy('created_at', 'desc')->get();
+        }
+
+        return view('tracking', compact('logs'));
+    }
 }

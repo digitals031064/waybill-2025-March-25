@@ -4,7 +4,7 @@
     } </script>
     <div class="px-12">
         <div class="mt-8 flex-col justify-center p-12 bg-gray-100 rounded-xl">
-            <form class="max-w-md mx-auto" method="GET" action="{{route('waybills.track')}}"> 
+            <form class="max-w-md mx-auto" method="GET" action="{{route('logs.track')}}"> 
                 @csrf
                 @method('GET')  
                 <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
@@ -19,7 +19,7 @@
                 </div>
             </form>               
             @if(request()->has('waybill_no'))
-                @if ($waybill)
+                @if ($logs)
                     <div class="justify-center items-center overflow-auto rounded-lg">
                         <table id="waybillTable" class="shadow-md w-full rounded-xl text-sm text-left rtl:text-right text-gray-500 my-8 dark:text-gray-400">
                             <thead class="bg-blue-400 text-xs text-gray-700 uppercase rounded-xl">
@@ -37,19 +37,22 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($logs as $log)
                                 <tr class="bg-white border-b rounded-xl dark:bg-gray-800 dark:border-gray-700">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{$waybill->waybill_no}}
+                                        {{$log->waybill->waybill_no}}
                                     </th>
                                     <td class="px-6 py-4">
-                                        {{$waybill->status}}
+                                        {{$log->status}}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{$waybill->updated_at}}
+                                        {{$log->updated_at}}
                                     </td>
                             
                                 
                                 </tr>
+                                @endforeach
+                                
                             </tbody>
                         </table>
                     </div> 
