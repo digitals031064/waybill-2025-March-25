@@ -1,6 +1,6 @@
 <x-front-layout>
     <div class="mt-4">
-        <div class=" m-8 flex justify-center overflow-visible">
+        <div class=" m-8 flex overflow-visible">
             <form class="bg-white max-w-md m-8 p-8 w-96 rounded-xl shadow-xl" id="shippingForm">
                 <h2 class="text-xl text-black mb-6">Shipping Rate Calculator</h2>
                 <div class="grid md:grid-cols-2 md:gap-6">
@@ -33,14 +33,15 @@
                         <label for="pickupCheckbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Door to Pier</label>
                     </div>
                 </div>
-                <div class="relative z-0 w-full mb-8 group hidden" id="pickupDropdown">
-                    <label for="underline_select" class="sr-only">Underline select</label>
-                        <select id="underline_select" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                            <option selected>Pickup Location</option>
-                            <option value="US">Between Place 1 and Place 2</option>
-                            <option value="CA">Between Place 3 and Place 4</option>
-                            <option value="FR">Between Place 5 and Place 6</option>
-                        </select>
+                <div class="relative z-0 w-full mb-8 group hidden" id="Pickup">
+                    <select id="pickupDropdown" onchange="updatePickup()" class="mb-2">
+                        <option value="">--Choose--</option>
+                        <option value="manila">Manila, Philippines</option>
+                        <option value="zamboanga">Zamboanga City, Philippines</option>
+                    </select>
+                    <select id="subPickup">
+                        <option value="">--Choose--</option>
+                    </select>
                 </div>
                 <div class="relative z-0 w-full mb-8 group">
                     <div class="flex items-center mb-4">
@@ -48,12 +49,14 @@
                         <label for="dropoffCheckbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Pier to Door</label>
                     </div>
                 </div>
-                <div class="relative z-0 w-full mb-8 group hidden" id="dropoffDropdown">
-                    <select id="underline_select" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                        <option selected>Pickup Location</option>
-                        <option value="US">Between Place 1 and Place 2</option>
-                        <option value="CA">Between Place 3 and Place 4</option>
-                        <option value="FR">Between Place 5 and Place 6</option>
+                <div class="relative z-0 w-full mb-8 group hidden" id="Dropoff">
+                    <select id="dropoffDropdown" onchange="updateDropoff()" class="mb-2">
+                        <option value="">--Choose--</option>
+                        <option value="manila">Manila, Philippines</option>
+                        <option value="zamboanga">Zamboanga City, Philippines</option>
+                    </select>
+                    <select id="subDropoff">
+                        <option value="">--Choose--</option>
                     </select>
                 </div>
                 <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500">Submit</button>
@@ -64,7 +67,7 @@
         
     </div>
     <script>
-        document.getElementById('shippingForm').addEventListener('submit', function (e) {
+        /* document.getElementById('shippingForm').addEventListener('submit', function (e) {
           e.preventDefault();
     
          
@@ -88,10 +91,90 @@
           resultDiv.classList.remove('hidden');
 
           
+        }); */
+        const subLocations = {
+            manila: ["Binondo", "Ermita", "Intramuros", "Malate", "Paco", "Pandacan", "Port Area", "Quiapo", "Sampaloc", "San Andres", "San Miguel", "San Nicolas", "Santa Ana", "Santa Cruz", "Santa Mesa", "Tondo"],
+            zamboanga: ["Baliwasan", "Canelar", "Pasonanca", "Putik", "Santa Maria", "Tetuan", "Tugbungan", "Zambowood"]
+        };
+
+        function updatePickup() {
+            const mainLocation = document.getElementById("pickupDropdown").value;
+            const subLocationSelect = document.getElementById("subPickup");
+            
+            subLocationSelect.innerHTML = '<option value="">--Choose--</option>';
+            
+            if (subLocations[mainLocation]) {
+                subLocations[mainLocation].forEach(sub => {
+                    let option = document.createElement("option");
+                    option.value = sub.toLowerCase();
+                    option.textContent = sub;
+                    subLocationSelect.appendChild(option);
+                });
+            }
+        }
+
+        function updateDropoff() {
+            const mainLocation = document.getElementById("dropoffDropdown").value;
+            const subLocationSelect = document.getElementById("subDropoff");
+            
+            subLocationSelect.innerHTML = '<option value="">--Choose--</option>';
+            
+            if (subLocations[mainLocation]) {
+                subLocations[mainLocation].forEach(sub => {
+                    let option = document.createElement("option");
+                    option.value = sub.toLowerCase();
+                    option.textContent = sub;
+                    subLocationSelect.appendChild(option);
+                });
+            }
+        }
+
+        const subLocationFees = 
+        {
+    // Fees per sub-location
+        binondo: 50, ermita: 60, intramuros: 55, malate: 70, paco: 65,
+        pandacan: 75, "port area": 80, quiapo: 50, sampaloc: 65, "san andres": 55,
+        "san miguel": 60, "san nicolas": 70, "santa ana": 50, "santa cruz": 55,
+        "santa mesa": 65, tondo: 80,
+        
+        baliwasan: 90, canelar: 85, pasonanca: 100, putik: 95, "santa maria": 80,
+        tetuan: 85, tugbugan: 70, zambowood: 75
+        };
+
+        document.getElementById('shippingForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const length = parseFloat(document.getElementById('length').value);
+            const width = parseFloat(document.getElementById('width').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            const value = parseFloat(document.getElementById('value').value);
+            const pickupSubLocation = document.getElementById('subPickup').value.toLowerCase();
+            const dropoffSubLocation = document.getElementById('subDropoff').value.toLowerCase();
+
+            // Calculate base shipping rates
+            const formula1 = ((length / 100) * (width / 100) * (height / 100)) * 3360;
+            const formula2 = weight * 10;
+            const formula3 = value * 0.08;
+
+            let highestRate = Math.max(formula1, formula2, formula3);
+
+            // Get pickup and dropoff fees if applicable
+            const pickupCharge = subLocationFees[pickupSubLocation] || 0;
+            const dropoffCharge = subLocationFees[dropoffSubLocation] || 0;
+
+            // Add pickup and dropoff charges
+            highestRate += pickupCharge + dropoffCharge;
+
+
+            // Display result
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `Your Shipment will cost: PHP ${highestRate.toFixed(2)}`;
+            resultDiv.classList.remove('hidden');
         });
 
         const checkbox = document.getElementById('pickupCheckbox');
-        const hiddenContent = document.getElementById('pickupDropdown');
+        const hiddenContent = document.getElementById('Pickup');
 
         checkbox.addEventListener('change', function () {
 
@@ -104,7 +187,7 @@
         });
 
         const checkbox1 = document.getElementById('dropoffCheckbox');
-        const hiddenContent1 = document.getElementById('dropoffDropdown');
+        const hiddenContent1 = document.getElementById('Dropoff');
 
         checkbox1.addEventListener('change', function () {
 
@@ -115,5 +198,6 @@
             hiddenContent1.classList.add('hidden');
         }
         });
+
       </script>
 </x-front-layout>

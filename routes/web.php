@@ -38,11 +38,11 @@ Route::get('/tracking/track', [WaybillController::class, 'track'])->name('waybil
 Route::get('/waybill/waybills', function () {
     $statuses = [
         'Pending',
-        'In Transit',
-        'At Port of Origin',
+        'Arrived in Van Yard',
+        'Arrived at Port of Origin',
+        'Departed from Port of Origin',
         'Arrived at Port of Destination',
-        'Delivered',
-        'Cancelled'
+        'Delivered'
     ];
 
     $search = request()->query('search');
