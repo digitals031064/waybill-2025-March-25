@@ -4,7 +4,7 @@
           <div class="mx-auto max-w-2xl lg:text-center">
             <h2 class="text-base/7 font-semibold text-indigo-600">Safe and Secure Cargo Forwarding</h2>
             <p class="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl lg:text-balance">The Premier Cargo Forwarder of Zamboanga City.</p>
-            <p class="mt-6 text-lg/8 text-gray-600">Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum pulvinar et feugiat blandit at. In mi viverra elit nunc.</p>
+            <p class="mt-6 text-lg/8 text-gray-600">Delivering reliable, efficient, and cost-effective freight solutions since 2006.</p>
           </div>
           <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
             <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
@@ -17,7 +17,7 @@
                   </div>
                   Long History
                 </dt>
-                <dd class="mt-2 text-base/7 text-gray-600">Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.</dd>
+                <dd class="mt-2 text-base/7 text-gray-600">With years of experience in the industry, we have built a strong reputation for excellence and reliability in cargo forwarding.</dd>
               </div>
               <div class="relative pl-16">
                 <dt class="text-base/7 font-semibold text-gray-900">
@@ -28,7 +28,7 @@
                   </div>
                   Fast Shipping
                 </dt>
-                <dd class="mt-2 text-base/7 text-gray-600">Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.</dd>
+                <dd class="mt-2 text-base/7 text-gray-600">Through strong partnerships with trusted shipping lines, we help ensure your cargo moves swiftly and smoothly across the Philippines.</dd>
               </div>
               <div class="relative pl-16">
                 <dt class="text-base/7 font-semibold text-gray-900">
@@ -39,7 +39,7 @@
                   </div>
                   Reliable Customer Service
                 </dt>
-                <dd class="mt-2 text-base/7 text-gray-600">Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis auctor congue commodo diam neque.</dd>
+                <dd class="mt-2 text-base/7 text-gray-600">We prioritize customer satisfaction by providing responsive support and clear communication at every stage of the shipping process.</dd>
               </div>
               <div class="relative pl-16">
                 <dt class="text-base/7 font-semibold text-gray-900">
@@ -50,13 +50,13 @@
                   </div>
                   Trucking Services
                 </dt>
-                <dd class="mt-2 text-base/7 text-gray-600">Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.</dd>
+                <dd class="mt-2 text-base/7 text-gray-600">Trucking Services: Our dedicated fleet of trucks offers seamless and secure transportation for goods across various locations.</dd>
               </div>
             </dl>
           </div>
         </div>
 
-        <div id="accordion-collapse" data-accordion="collapse" class="mt-12">
+        {{-- <div id="accordion-collapse" data-accordion="collapse" class="mt-12">
           <h2 id="accordion-collapse-heading-1">
             <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-1" aria-expanded="true" aria-controls="accordion-collapse-body-1">
               <span>Who is RM Cargo?</span>
@@ -85,7 +85,7 @@
               <p class="text-gray-500 dark:text-gray-400">Check out the <a href="https://flowbite.com/figma/" class="text-blue-600 dark:text-blue-500 hover:underline">Figma design system</a> based on the utility classes from Tailwind CSS and components from Flowbite.</p>
             </div>
           </div>
-        </div>
+        </div> --}}
 
       </div>
       
