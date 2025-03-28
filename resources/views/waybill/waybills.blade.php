@@ -767,7 +767,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('submitConsignee').addEventListener('click', function() {
         const consigneeName = document.getElementById('consigneeName').value.trim();
         const consigneePhone = document.getElementById('consigneePhone').value.trim();
-
+        const billingAddress = document.getElementById('billingAddress').value.trim();
         // Validate the input
         if (!consigneeName || !consigneePhone) {
             alert("Please provide both name and phone number.");
@@ -776,7 +776,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Get CSRF token from the meta tag
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
+        console.log("CSRF Token:", csrfToken);
         // Perform the submit action, such as making a request to your server
         fetch('/consignees/add', {
             method: 'POST',
@@ -787,7 +787,7 @@ document.addEventListener('DOMContentLoaded', function() {
             body: JSON.stringify({
                 name: consigneeName,
                 phone_number: consigneePhone,
-                billing_address: document.getElementById('billingAddress').value, // Add billing address if needed
+                billing_address: billingAddress // Add billing address if needed
             }),
         })
         .then(response => {
