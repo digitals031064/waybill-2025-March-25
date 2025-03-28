@@ -24,7 +24,14 @@ class WaybillFactory extends Factory
             'shipment' => $this->faker->word . ' - ' . $this->faker->word,
             'price' => $this->faker->randomFloat(2, 100, 10000),
             'cbm' => $this->faker->randomFloat(1, 0.5, 10),
-            'status' => $this->faker->randomElement(['Pending', 'In Transit', 'Delivered']),
+            'status' => $this->faker->randomElement([
+                'Pending',
+                'Arrived in Van Yard',
+                'Arrived at Port of Origin',
+                'Departed from Port of Origin',
+                'Arrived at Port of Destination',
+                'Delivered'
+            ]),
         ];
     }
 }

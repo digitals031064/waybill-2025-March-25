@@ -21,7 +21,7 @@
             @if(request()->has('waybill_no'))
                 @if ($logs)
                     <div class="justify-center items-center overflow-auto rounded-lg">
-                        <table id="waybillTable" class="shadow-md w-full rounded-xl text-sm text-left rtl:text-right text-gray-500 my-8 dark:text-gray-400">
+                        <table id="waybillTable" class="shadow-md w-full rounded-xl text-sm text-left rtl:text-right text-gray-500 my-8">
                             <thead class="bg-blue-400 text-xs text-gray-700 uppercase rounded-xl">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
@@ -38,8 +38,8 @@
                             </thead>
                             <tbody>
                                 @foreach ($logs as $log)
-                                <tr class="bg-white border-b rounded-xl dark:bg-gray-800 dark:border-gray-700">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <tr class="bg-white border-b rounded-xl">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                         {{$log->waybill->waybill_no}}
                                     </th>
                                     <td class="px-6 py-4">

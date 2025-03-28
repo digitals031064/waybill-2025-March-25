@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('waybill_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('action');
+            $table->string('status');
             $table->text('description');
             $table->timestamps();
         });

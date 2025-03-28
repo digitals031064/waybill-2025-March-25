@@ -55,6 +55,7 @@ class Waybill extends Model
             'user_id' => auth()->id() ?? $waybill->user_id,
             'waybill_id' => $waybill->id,
             'action' => $action,
+            'status' => $waybill->status,
             'description' => $description,
         ]);
     }

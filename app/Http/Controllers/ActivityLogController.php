@@ -27,7 +27,7 @@ class ActivityLogController extends Controller
 
         if ($request->has('waybill_no')) {
             $request->validate([
-                'waybill_no' => 'required|digits:6' 
+                'waybill_no' => 'required|alpha_num' 
             ]);
 
             $logs = ActivityLog::whereHas('waybill', function ($query) use ($request) {

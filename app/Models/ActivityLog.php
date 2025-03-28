@@ -10,7 +10,7 @@ class ActivityLog extends Model
     use HasFactory;
 
     // Specifies which fields are mass assignable
-    protected $fillable = ['user_id', 'waybill_id', 'action', 'description'];
+    protected $fillable = ['user_id', 'waybill_id', 'action', 'status', 'description'];
 
     /**
      * Relationship: An activity log belongs to a user.
