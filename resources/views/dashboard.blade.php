@@ -4,7 +4,7 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
-
+    {{ dd($auth->user()->role) }}
     <div class="py-12">
         <div class="max-w-7xl mx-auto mb-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-3 gap-8">

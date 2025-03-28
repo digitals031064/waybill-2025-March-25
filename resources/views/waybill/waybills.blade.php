@@ -317,6 +317,7 @@
                 <input type="text" id="consigneeName" placeholder="Consignee Name" class="w-full p-2 mb-4 border border-gray-300 rounded" />
                 <label for="consigneePhone" class="block text-sm font-semibold mb-2">Consignee Phone</label>
                 <input type="text" id="consigneePhone" placeholder="Consignee Phone" class="w-full p-2 mb-4 border border-gray-300 rounded" />
+                <input type="text" id="billingAddress" placeholder="Billing Address" class="w-full p-2 mb-4 border border-gray-300 rounded" />
                 <div class="flex justify-between">
                     <button id="submitConsignee" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Submit</button>
                     <button id="closeConsigneeForm" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Close</button>
@@ -332,6 +333,7 @@
                 <input type="text" id="shipperName" placeholder="Shipper Name" class="w-full p-2 mb-4 border border-gray-300 rounded" />
                 <label for="shipperPhone" class="block text-sm font-semibold mb-2">Consignee Phone</label>
                 <input type="text" id="shipperPhone" placeholder="Consignee Phone" class="w-full p-2 mb-4 border border-gray-300 rounded" />
+                <input type="text" id="shippingAddress" placeholder="Shipping Address" class="w-full p-2 mb-4 border border-gray-300 rounded" />
                 <div class="flex justify-between">
                     <button id="submitShipper" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Submit</button>
                     <button id="closeShipperForm" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Close</button>
@@ -723,6 +725,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const form = document.getElementById('addConsigneeForm');
         //clear the consigneePhone field
         consigneePhoneField.value = '';
+        document.getElementById('billingAddress').value = '';
 
         if (form) {
             form.classList.remove('hidden'); // Show the form
@@ -784,6 +787,7 @@ document.addEventListener('DOMContentLoaded', function() {
             body: JSON.stringify({
                 name: consigneeName,
                 phone_number: consigneePhone,
+                billing_address: document.getElementById('billingAddress').value, // Add billing address if needed
             }),
         })
         .then(response => {
@@ -829,6 +833,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const form = document.getElementById('addShipperForm');
         //clear the consigneePhone field
         shipperPhoneField.value = '';
+        document.getElementById('shippingAddress').value = '';
 
         if (form) {
             form.classList.remove('hidden'); // Show the form
@@ -868,6 +873,7 @@ document.addEventListener('DOMContentLoaded', function() {
             body: JSON.stringify({
                 name: shipperName,
                 phone_number: shipperPhone,
+                shipping_address: document.getElementById('shippingAddress').value, // Add shipping address if needed
             }),
         })
         .then(response => {
@@ -1031,6 +1037,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     addNewItem.addEventListener('click', function() {
                         consigneeList.classList.add('hidden'); // Hide dropdown list
                         document.getElementById("consigneePhone").value = '';
+                        document.getElementById("billingAddress").value = '';
                         addNewConsignee(query);
                         
                     });
@@ -1088,6 +1095,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         addNewItem.addEventListener('click', function() {
                             addShipperList.classList.add('hidden'); // Hide dropdown list
                             document.getElementById("add_shipper_no").value = '';
+                            document.getElementById("shippingAddress").value = '';
                             addNewShipper(query);
                             
                         });

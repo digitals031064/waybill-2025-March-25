@@ -65,7 +65,7 @@ class ProfileController extends Controller
         $waybills = Waybill::all();
 
         $user = auth()->user(); // Get the authenticated user
-
+  
         if ($user->usertype === 'admin') {
             return view('admin.dashboard', compact('waybills','users'));
         } else {
