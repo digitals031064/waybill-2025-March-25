@@ -16,10 +16,10 @@ class ActivityLogController extends Controller
     public function index()
     {
         // Fetch all activity logs, including related user and waybill data, sorted by latest first
-        $logs = ActivityLog::with(['user', 'waybill'])->latest()->get();
-
+        $logs = ActivityLog::with(['user', 'waybill'])->latest()->paginate(10);
+        $users = User::paginate(5);
         // Pass the logs data to the view
-        return view('admin.user-management', compact('logs'));
+        return view('admin.user-management', compact('logs', 'users'));
     }
 
     public function track(Request $request){
