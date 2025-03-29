@@ -105,9 +105,11 @@
                                     data-consignee_id="{{$waybill->consignee->id}}"
                                     data-consignee_name="{{$waybill->consignee->name}}"
                                     data-consignee_phone="{{$waybill->consignee->phone_number}}"
+                                    data-billing_address="{{$waybill->consignee->billing_address}}"
                                     data-shipper_id="{{$waybill->shipper->id}}"
                                     data-shipper_name="{{$waybill->shipper->name}}"
                                     data-shipper_phone="{{$waybill->shipper->phone_number}}"
+                                    data-shipping_address="{{$waybill->shipper->shipping_address}}"
                                     data-shipment="{{$waybill->shipment}}"
                                     data-cbm="{{$waybill->cbm}}"
                                     data-price="{{$waybill->price}}"
@@ -164,40 +166,62 @@
                     <form id="addWaybilLForm" name="addWaybilLForm">
                         @csrf
                         @method('POST')
-                        <div class="grid gap-4 mb-4 sm:grid-cols-3">
-                            <div>
+                        <!-- Waybill -->
+                        <div>
                                 <label for="waybill_no" class="form-field block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waybill Number</label>
                                 <input  type="text" name="waybill_no" id="waybill_no" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Waybill Number" required=""> 
-                            </div>
+                        </div>
+                        <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                            <!-- Consignee --> 
                             <div>
-                                <label for="consignee" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Consignee</label>
-                                <input type="text" name="consignee" id="add_consignee" class="form-field  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Consignee" required=""> 
-                                <div id="add_consignee_list" class="absolute z-10 bg-white shadow-md rounded-md w-full max-h-60 overflow-y-auto hidden"></div>
-                                <span class="text-xs text-red-600 text-left block" id="consignee_id_error"></span>
-                                <input type="hidden" name="consignee_id" id="add_consignee_id">
+                                <div>
+                                    <label for="consignee" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Consignee</label>
+                                    <input type="text" name="consignee" id="add_consignee" class="form-field  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Consignee" required=""> 
+                                    <div id="add_consignee_list" class="absolute z-10 bg-white shadow-md rounded-md w-full max-h-60 overflow-y-auto hidden"></div>
+                                    <span class="text-xs text-red-600 text-left block" id="consignee_id_error"></span>
+                                    <input type="hidden" name="consignee_id" id="add_consignee_id">
 
-                            </div>
-                            <div>
-                                <label for="consignee_no" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Consignee #</label>
-                                <input type="text" name="consignee_no" id="add_consignee_no" class="form-field  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Phone #" required="">
-                            </div>
-                            <div>
-                                <label for="shipper" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipper</label>
-                                <input type="text" name="shipper" id="add_shipper" class="form-field  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Shipper" required="">
-                                <div id="add_shipper_list" class="absolute z-10 bg-white shadow-md rounded-md w-full max-h-60 overflow-y-auto hidden"></div>
-                                <span class="text-xs text-red-600 text-left block" id="shpper_id_error"></span>
-                                <input type="hidden" name="shipper_id" id="add_shipper_id">
+                                </div>
+                                <div>
+                                    <label for="consignee_no" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Consignee #</label>
+                                    <input type="text" name="consignee_no" id="add_consignee_no" class="form-field  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Phone #" required="">
+                                </div>
+                                <div>
+                                    <label for="billingAddress" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Billing Address</label>
+                                    <input type="text" name="billingAddress" id="add_billing_address" 
+                                        class="form-field  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" 
+                                        placeholder="Billing Address" required="">
+                                </div>                                
                             </div>
 
-                            <div>
-                                <label for="shipper_no" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipper #</label>
-                                <input type="text" name="shipper_no" id="add_shipper_no" class="form-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Phone #" required="">
+                            <div> <!-- Shipper Information -->
+                                <div>
+                                    <label for="shipper" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipper</label>
+                                    <input type="text" name="shipper" id="add_shipper" class="form-field  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Shipper" required="">
+                                    <div id="add_shipper_list" class="absolute z-10 bg-white shadow-md rounded-md w-full max-h-60 overflow-y-auto hidden"></div>
+                                    <span class="text-xs text-red-600 text-left block" id="shpper_id_error"></span>
+                                    <input type="hidden" name="shipper_id" id="add_shipper_id">
+                                </div>
+
+                                <div>
+                                    <label for="shipper_no" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipper #</label>
+                                    <input type="text" name="shipper_no" id="add_shipper_no" class="form-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Phone #" required="">
+                                </div>
+                                <div>
+                                    <label for="shippingAddress" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipping Address</label>
+                                    <input type="text" name="shippingAddress" id="add_shipping_address" 
+                                        class="form-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" 
+                                        placeholder="Shipping Address" required="">
+                                </div>
                             </div>
-                            <div></div>
-                            <div>
-                                <label for="shipment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipment</label>
-                                <input type="text" name="shipment" id="shipment" class="form-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Shipment" required="">
-                            </div>
+                        </div>
+
+                        <div> <!-- Shipment Information -->
+                            <label for="shipment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipment</label>
+                            <input type="text" name="shipment" id="shipment" class="form-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Shipment" required="">
+                        </div>
+
+                        <div class="grid gap-4 mb-4 sm:grid-cols-3">
                             <div>
                                 <label for="cbm" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CBM</label>
                                 <input type="number" name="cbm" id="cbm" max="999999.99" step="0.01" class="form-field bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="CBM" required="">
@@ -229,7 +253,8 @@
             </div>
         </div>
                     <!-- Update modal -->
-        <div id="updateWaybillModal" name="updateWaybillModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div id="updateWaybillModal" name="updateWaybillModal" tabindex="-1" aria-hidden="true" 
+            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative p-4 w-full max-w-2xl max-h-full">
                 <!-- Modal content -->
                 <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
@@ -248,58 +273,87 @@
                         @csrf
                         @method('POST')
                         <input type="hidden" name="_method" value="PUT">
-                        <div class="grid gap-4 mb-4 sm:grid-cols-3">
+                        <div class="grid gap-4 mb-6">
                             <input type="hidden" id="update_waybill_id">
                             <div>
                                 <label for="waybill_no" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waybill Number</label>
                                 <input type="text" name="waybill_no" id="update_waybill_no" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Waybill Number"  required=""> 
                             </div>
-                            <div>
-                                <label for="consignee" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Consignee</label>
-                                <input type="text" name="consignee" id="update_consignee" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Consignee"  required=""> 
-                                <div id="consignee_list" class="absolute z-10 bg-white shadow-md rounded-md w-full max-h-60 overflow-y-auto hidden"></div>
-                                <span class="text-xs text-red-600 text-left block" id="consignee_id_error"></span>
-                                <input type="hidden" name="consignee_id" id="consignee_id">
-                            </div>
-                            <div>
-                                <label for="consignee_no" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Consignee #</label>
-                                <input type="text" name="consignee_no" id="update_consignee_no" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Phone #" required="">
-                            </div>
-                            <div>
-                                <label for="shipper" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipper</label>
-                                <input type="text" name="shipper" id="update_shipper" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Shipper" required="">
-                                <div id="shipper_list" class="absolute z-10 bg-white shadow-md rounded-md w-full max-h-60 overflow-y-auto hidden"></div>
-                                <span class="text-xs text-red-600 text-left block" id="consignee_id_error"></span>
-                                <input type="hidden" name="shipper_id" id="shipper_id">                                            
+                            
+                            <div class="grid gap-4 mb-6 sm:grid-cols-2">
+                                <!--- Consignee -->
+                                <div>
+                                    <div>
+                                        <label for="consignee" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Consignee</label>
+                                        <input type="text" name="consignee" id="update_consignee" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Consignee"  required=""> 
+                                        <div id="consignee_list" class="absolute z-10 bg-white shadow-md rounded-md w-full max-h-60 overflow-y-auto hidden"></div>
+                                        <span class="text-xs text-red-600 text-left block" id="consignee_id_error"></span>
+                                        <input type="hidden" name="consignee_id" id="consignee_id">
+                                    </div>
+                                    <div>
+                                        <label for="consignee_no" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Consignee #</label>
+                                        <input type="text" name="consignee_no" id="update_consignee_no" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Phone #" required="">
+                                    </div>
+
+                                    <div>
+                                        <label for="billingAddress" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Billing Address</label>
+                                        <input type="text" name="billingAddress" id="update_billing_address" 
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" 
+                                            placeholder="Billing Address" required="">
+                                    </div>                                     
+                                </div>
+                                <!--- Shipper -->
+                                <div>
+                                    <div>
+                                        <label for="shipper" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipper</label>
+                                        <input type="text" name="shipper" id="update_shipper" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Shipper" required="">
+                                        <div id="shipper_list" class="absolute z-10 bg-white shadow-md rounded-md w-full max-h-60 overflow-y-auto hidden"></div>
+                                        <span class="text-xs text-red-600 text-left block" id="consignee_id_error"></span>
+                                        <input type="hidden" name="shipper_id" id="shipper_id">                                            
+                                    </div>
+
+                                    <div>
+                                        <label for="shipper_no" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipper #</label>
+                                        <input type="text" name="shipper_no" id="update_shipper_no" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Phone #" required="">
+                                    </div>
+                                    <div>
+                                        <label for="shippingAddress" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipping Address</label>
+                                        <input type="text" name="shippingAddress" id="update_shipping_address" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" 
+                                            placeholder="Shipping Address" required="">
+                                    </div>                                    
+                                </div>
+                               
                             </div>
 
-                            <div>
-                                <label for="shipper_no" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipper #</label>
-                                <input type="text" name="shipper_no" id="update_shipper_no" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Phone #" required="">
-                            </div>
-                            <div></div>
+                            <!-- Shipment Information -->
                             <div>
                                 <label for="shipment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipment</label>
                                 <input type="text" name="shipment" id="update_shipment" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Shipment" required="">
                             </div>
-                            <div>
-                                <label for="cbm" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CBM</label>
-                                <input type="number" name="cbm" id="update_cbm" max="9999999.99" step="0.01" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="CBM" required="">
+                            <!--- Shipment Details -->
+                            <div class="grid gap-4 mb-6 sm:grid-cols-3">
+                                <div>
+                                    <label for="cbm" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CBM</label>
+                                    <input type="number" name="cbm" id="update_cbm" max="9999999.99" step="0.01" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="CBM" required="">
+                                </div>
+                                <div>
+                                    <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+                                    <input type="number" name="price" id="update_price" max="999999.99" step="0.01" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="PHP" required="">
+                                </div>    
+                                <div>
+                                    <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+                                    <select name="status" id="update_status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
+                                        @foreach($statuses as $status)
+                                            <option value="{{ $status }}" {{ $waybill->status == $status ? 'selected' : '' }}>
+                                                {{ $status }}
+                                            </option>
+                                        @endforeach
+                                    </select>                                        
+                                </div>                                                            
                             </div>
-                            <div>
-                                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                                <input type="number" name="price" id="update_price" max="999999.99" step="0.01" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="PHP" required="">
-                            </div>
-                            <div>
-                                <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
-                                <select name="status" id="update_status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
-                                    @foreach($statuses as $status)
-                                        <option value="{{ $status }}" {{ $waybill->status == $status ? 'selected' : '' }}>
-                                            {{ $status }}
-                                        </option>
-                                    @endforeach
-                                </select>                                        
-                            </div>                                    </div>
+
+
+                                    </div>
                         <div class="flex items-center space-x-4">
                             <button type="submit" class="text-white bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Update Waybill</button>
                         </div>
@@ -477,9 +531,12 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('consignee_id').value = row.dataset.consignee_id;
             document.getElementById('update_consignee').value = row.dataset.consignee_name;
             document.getElementById('update_consignee_no').value = row.dataset.consignee_phone;
+            document.getElementById('update_billing_address').value = row.dataset.billing_address;
+
             document.getElementById('shipper_id').value= row.dataset.shipper_id;
             document.getElementById('update_shipper').value = row.dataset.shipper_name;
             document.getElementById('update_shipper_no').value = row.dataset.shipper_phone;
+            document.getElementById('update_shipping_address').value = row.dataset.shipping_address;
             document.getElementById('update_shipment').value = row.dataset.shipment;
             document.getElementById('update_cbm').value = row.dataset.cbm;
             document.getElementById('update_price').value = row.dataset.price;
@@ -531,9 +588,11 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('consignee_id').value = row.dataset.consignee_id;
             document.getElementById('update_consignee').value = row.dataset.consignee_name;
             document.getElementById('update_consignee_no').value = row.dataset.consignee_phone;
+            document.getElementById('update_billing_address').value = row.dataset.billing_address;
             document.getElementById('shipper_id').value= row.dataset.shipper_id;
             document.getElementById('update_shipper').value = row.dataset.shipper_name;
             document.getElementById('update_shipper_no').value = row.dataset.shipper_phone;
+            document.getElementById('update_shipping_address').value = row.dataset.shipping_address; //march 29
             document.getElementById('update_shipment').value = row.dataset.shipment;
             document.getElementById('update_cbm').value = row.dataset.cbm;
             document.getElementById('update_price').value = row.dataset.price;
@@ -612,8 +671,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     <strong>Status:</strong> ${this.dataset.status} <br>
                     <strong>Price:</strong> ${this.dataset.price} <br>
                     <strong>CBM:</strong> ${this.dataset.cbm} <br>
-                    <strong>Shipper:</strong> ${this.dataset.shipper_id} ${this.dataset.shipper_name} (${this.dataset.shipper_phone}) <br>
-                    <strong>Consignee:</strong> ${this.dataset.consignee_id} ${this.dataset.consignee_name} (${this.dataset.consignee_phone})
+                    <strong>Shipper:</strong> ${this.dataset.shipper_id} ${this.dataset.shipper_name} ${this.dataset.shipping_address} (${this.dataset.shipper_phone}) <br>
+                    <strong>Consignee:</strong> ${this.dataset.consignee_id} ${this.dataset.consignee_name} ${this.dataset.billing_address} (${this.dataset.consignee_phone})
                 `;
 
             tooltip.innerHTML = details;
@@ -639,6 +698,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const consigneeIdField = document.getElementById('consignee_id');
     const consigneeList = document.getElementById('consignee_list');
     const consigneeNoField = document.getElementById('update_consignee_no');
+    const consigneeBillingAddress = document.getElementById('add_billing_address');
 
     let typingTimer;
     const doneTypingInterval = 200;
@@ -681,6 +741,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             consigneeNameField.value = consignee.name;
                             consigneeIdField.value = consignee.id;
                             consigneeNoField.value = consignee.phone_number;
+                            consigneeBillingAddress.value=consignee.billing_address;
+
                             consigneeList.classList.add('hidden');
                         });
 
@@ -990,6 +1052,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const addConsigneeIdField = document.getElementById('add_consignee_id');
         const addConsigneeList = document.getElementById('add_consignee_list');
         const addConsigneeNoField = document.getElementById('add_consignee_no');
+        const addBillingAddress = document.getElementById('add_billing_address');
         addConsigneeNameField.addEventListener('keyup', function() {
             clearTimeout(typingTimer);
             if (addConsigneeNameField.value) {
@@ -1022,6 +1085,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             addConsigneeNameField.value = consignee.name;
                             addConsigneeIdField.value = consignee.id;
                             addConsigneeNoField.value = consignee.phone_number;
+                            addBillingAddress.value = consignee.billing_address;
+
                             addConsigneeList.classList.add('hidden');
                         });
 
@@ -1061,7 +1126,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const addShipperList = document.getElementById('add_shipper_list');
         const addShipperIdField = document.getElementById('add_shipper_id');
         const addShipperNoField = document.getElementById('add_shipper_no');
-
+        const addShippingAddress = document.getElementById('add_shipping_address');
         function addSearchShippers() {
             const query = addShipperNameField.value;
             fetch(`/shippers/search?query=${query}`)
@@ -1078,6 +1143,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                 addShipperNameField.value = shipper.name;
                                 addShipperIdField.value = shipper.id;
                                 addShipperNoField.value = shipper.phone_number;
+                                addShippingAddress.value= shipper.shipping_address;
+
                                 addShipperList.classList.add('hidden');
                             });
                             
