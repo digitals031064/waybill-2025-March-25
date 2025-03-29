@@ -1,5 +1,6 @@
 <x-app-layout>
     <div class="py-12">
+        <h1>User Management - Activity Log Controller</h1>
         <section class="bg-gray-50 p-3 sm:p-5 antialiased">
             <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
                 <div class="mb-4">
